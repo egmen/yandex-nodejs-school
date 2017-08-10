@@ -4,7 +4,44 @@
 	<title>Школа Node.JS</title>
 </head>
 <body>
-
+<form>
+	<p>
+		<label>ФИО
+			<input
+				type="text"
+				name="fio"
+				placeholder="ФИО - ровно 3 слова"
+				pattern="[a-zA-Zа-яёА-ЯЁ-]+\s[a-zA-Zа-яёА-ЯЁ]+\s[a-zA-Zа-яёА-ЯЁ]+"
+			/>
+		</label>
+	<p>
+		<label>Email
+			<input
+				type="email"
+				name="email"
+				placeholder="Email в Яндексе"
+				pattern="([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@(ya\.ru|(yandex\.(ru|ua|by|kz|com)))"
+			/>
+		</label>
+	</p>
+	<p>
+		<label>Телефон
+			<input
+				type="tel"
+				name="phone"
+				placeholder="Cумма цифр телефона < 30"
+				pattern="\+7\(\d{3}\)\d{3}-\d{2}-\d{2}"
+			/>
+		</label>
+	</p>
+	<p>
+		<label>
+			<input id="submitButton"
+				type="submit"
+			/>
+		</label>
+	</p>
+</form>
 <script type="text/javascript" src="index.js"></script>
 </body>
 </html>

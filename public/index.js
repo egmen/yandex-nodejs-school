@@ -21,8 +21,9 @@
       this.phone.value = phone
       return
     }
-    submit () {
-      return
+    submit (form) {
+      form.submit()
+      return false
     }
   }
 

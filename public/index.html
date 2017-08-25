@@ -11,7 +11,10 @@
 	</style>
 </head>
 <body>
-<form onsubmit="return window.MyForm.submit(this);">
+<form
+	method="POST"
+	action="submit-form"
+	onsubmit="return window.MyForm.submit(this);">
 	<p>
 		<label>ФИО
 			<input

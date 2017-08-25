@@ -51,11 +51,12 @@
 </form>
 <div id="resultContainer"></div>
 <script type="text/javascript" src="index.js"></script>
-<p><button onclick="console.log(window.MyForm.getData())">Проверка получения данных</button></p>
 <p><button onclick="window.MyForm.setData({
 	fio: 'Иванов Иван Иванович',
 	email: 'ivanov@yandex.ru',
 	phone: '+7(999)111-15-38'
 	})">Проверка записи данных</button></p>
+<p><button onclick="console.log(window.MyForm.getData())">Проверка получения данных</button></p>
+<p><button onclick="console.log(window.MyForm.validate())">Проверка валидации данных</button></p>
 </body>
 </html>

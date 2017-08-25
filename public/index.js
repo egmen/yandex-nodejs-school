@@ -1,5 +1,6 @@
 (function main () {
   const MyForm = function MyForm () {
+    const errorClassName = 'error'
     const input = {
       fio: document.querySelector('input[name="fio"]'),
       email: document.querySelector('input[name="email"]'),
@@ -23,13 +24,20 @@
         .map((name) => input[name])
         .reduce((res, input) => {
           const {name, value} = input
+          let isValid = true
+
           // Проверка полей по регулярному выражению средствами браузера
           if (value === '' || !input.checkValidity()) {
-            res.push(name)
+            isValid = false
           // Дополнительно проверка поля phone по сумме цифр
           } else if (name === 'phone' && checkDigitSum(value) > 30) {
-            res.push(name)
+            isValid = false
           }
+          if (!isValid) res.push(name)
+
+          // Установка класса error
+          setErrorClass(input, isValid)
+          
           return res
         }, [])
 
@@ -85,6 +93,17 @@
         .reduce((sum, cur) => sum + +cur, 0)
 
       return digitSum
+    }
+
+    /**
+     * Установка класса ошибки полю ввода
+     * при несоответвии наличия класса и валидности поля (XOR), сделать toggle
+     * @param {Element}  input   Поле ввода HTML
+     */
+    function setErrorClass (input, isValid) {
+      if (input.classList.contains(errorClassName) ^ !isValid) {
+        input.classList.toggle(errorClassName)
+      }
     }
   }
 

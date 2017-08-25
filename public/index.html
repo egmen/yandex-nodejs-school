@@ -3,7 +3,7 @@
 <head>
 	<title>Школа Node.JS</title>
 	<style type="text/css">
-		input:invalid {
+		input:invalid,input.error {
 			border-width: 1px;
 			border-style: solid;
 			border-color: red;
@@ -55,8 +55,8 @@
 	fio: 'Иванов Иван Иванович',
 	email: 'ivanov@yandex.ru',
 	phone: '+7(999)111-15-38'
-	})">Проверка записи данных</button></p>
-<p><button onclick="console.log(window.MyForm.getData())">Проверка получения данных</button></p>
-<p><button onclick="console.log(window.MyForm.validate())">Проверка валидации данных</button></p>
+	})">setData()</button></p>
+<p><button onclick="console.log(window.MyForm.getData())">getData()</button></p>
+<p><button onclick="console.log(window.MyForm.validate())">validate()</button></p>
 </body>
 </html>

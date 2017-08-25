@@ -57,8 +57,18 @@
 <p><button onclick="window.MyForm.setData({
 	fio: 'Иванов Иван Иванович',
 	email: 'ivanov@yandex.ru',
+	phone: '+7(111)111-15-38'
+	})">setData() всё корректно</button></p>
+<p><button onclick="window.MyForm.setData({
+	fio: 'Иванов Иван Иванович',
+	email: 'ivanov@yandex.ru',
 	phone: '+7(999)111-15-38'
-	})">setData()</button></p>
+	})">setData() некорректный телефон</button></p>
+<p><button onclick="window.MyForm.setData({
+	fio: 'Иванов Иван',
+	email: 'ivanov@yanex.ru',
+	phone: '+7(999)111-1538'
+	})">setData() некорректные все поля</button></p>
 <p><button onclick="console.log(window.MyForm.getData())">getData()</button></p>
 <p><button onclick="console.log(window.MyForm.validate())">validate()</button></p>
 </body>

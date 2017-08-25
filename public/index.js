@@ -80,6 +80,9 @@
       const {isValid} = validate()
       if (!isValid) return false
 
+      const {submitButton} = form.elements
+      submitButton.disabled = true
+
       const {
         action,
         method
@@ -101,16 +104,16 @@
               window.setTimeout(() => submit(form), timeout)
               break
             case 'success':
-              setResultState(status)
-              break
             case 'error':
-              setResultState(status, reason)
+              setResultState(status, reason || '')
+              submitButton.disabled = false
               break
             default:
               throw new Error('Неизвестный статус')
           }
         })
         .catch((err) => {
+          submitButton.disabled = false
           setResultState('error', `Ошибка получения ответа ${err.toString()}`)
         })
 

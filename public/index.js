@@ -1,43 +1,39 @@
 (function main () {
   const MyForm = function MyForm () {
-    const errorClassName = 'error'
+    const ERROR_CLASS_NAME = 'error'
+    const MAX_PHONE_SUM = 30
+    const RESULT_CLASS_NAMES = 'progress_success_error'.split('_')
+
     const input = {
       fio: document.querySelector('input[name="fio"]'),
       email: document.querySelector('input[name="email"]'),
       phone: document.querySelector('input[name="phone"]')
     }
 
-    return {
-      validate,
-      getData,
-      setData,
-      submit
-    }
-
     /**
      * Проверка валидности полей и назначение класса ошибки
      * @return {Object} [description]
      */
-    function validate () {
+    const validate = function validate () {
       const errorFields = Object
         .keys(input)
         .map((name) => input[name])
-        .reduce((res, input) => {
-          const {name, value} = input
+        .reduce((res, inputField) => {
+          const {name, value} = inputField
           let isValid = true
 
           // Проверка полей по регулярному выражению средствами браузера
-          if (value === '' || !input.checkValidity()) {
+          if (value === '' || !inputField.checkValidity()) {
             isValid = false
           // Дополнительно проверка поля phone по сумме цифр
-          } else if (name === 'phone' && checkDigitSum(value) > 30) {
+          } else if (name === 'phone' && checkDigitSum(value) > MAX_PHONE_SUM) {
             isValid = false
           }
           if (!isValid) res.push(name)
 
           // Установка класса error
-          setErrorClass(input, isValid)
-          
+          setErrorClass(inputField, isValid)
+
           return res
         }, [])
 
@@ -51,7 +47,7 @@
      * Получение данных из формы
      * @return {Object} ФИО, email и телефон из формы
      */
-    function getData () {
+    const getData = function getData () {
       return {
         fio: input.fio.value,
         email: input.email.value,
@@ -64,12 +60,14 @@
      * @param {String} options.fio   Фамилия, имя и отчество (ровно 3 слова)
      * @param {String} options.email Email на Яндексе
      * @param {String} options.phone Номер телефона в международном формате
+     * @return {Boolean}             Просто заглушка для линтинга
      */
-    function setData ({fio, email, phone}) {
+    const setData = function setData ({fio, email, phone}) {
       input.fio.value = fio
       input.email.value = email
       input.phone.value = phone
-      return
+
+      return false
     }
 
     /**
@@ -77,7 +75,7 @@
      * @param  {Element} form Форма, которую пытаемся отправить
      * @return {Boolean}      Отмена стандартного действия, если JS загрузился
      */
-    function submit (form) {
+    const submit = function submit (form) {
       // Выход, если валидация не пройдена
       const {isValid} = validate()
       if (!isValid) return false
@@ -124,7 +122,7 @@
      * Получение случайного названия файла по заложенной вероятности
      * @return {String} Имя файла, которое в ответ получит форма
      */
-    function createFakeAction () {
+    const createFakeAction = function createFakeAction () {
       const actionTypes = {
         success: 2,
         error: 1,
@@ -143,7 +141,7 @@
      * @param  {String} text Строка в которой требуется посчитать сумму цифр
      * @return {Number}      Сумма цифр
      */
-    function checkDigitSum (text) {
+    const checkDigitSum = function checkDigitSum (text) {
       const digitSum = text
         .match(/\d/g)
         .reduce((sum, cur) => sum + Number(cur), 0)
@@ -154,30 +152,43 @@
     /**
      * Установка класса ошибки полю ввода
      * при несоответвии наличия класса и валидности поля (XOR), сделать toggle
-     * @param {Element}  inputField   Поле ввода HTML
+     * @param {Element} inputField   Поле ввода HTML
+     * @param {Boolean} isValid      Признак валидности поля
+     * @return {Boolean}             Просто заглушка для линтинга
      */
-    function setErrorClass (inputField, isValid) {
-      if (inputField.classList.contains(errorClassName) ^ !isValid) {
-        inputField.classList.toggle(errorClassName)
+    const setErrorClass = function setErrorClass (inputField, isValid) {
+      if (inputField.classList.contains(ERROR_CLASS_NAME) ^ !isValid) {
+        inputField.classList.toggle(ERROR_CLASS_NAME)
       }
+
+      return false
     }
 
     /**
      * Установка класса результата
      * @param {String} className Наименование класса для установки
      * @param {String} text      Текст для установки в компоненте
+     * @return {Boolean}             Просто заглушка для линтинга
      */
-    function setResultState (className, text = '') {
-      const classList = 'progress_success_error'.split('_')
+    const setResultState = function setResultState (className, text = '') {
       const resultContainer = document.querySelector('#resultContainer')
 
       // Проверка соответсвия текущего класса и отсутвию других
-      classList.forEach((currentClass) => {
+      RESULT_CLASS_NAMES.forEach((currentClass) => {
         if (resultContainer.classList.contains(currentClass) ^ !(className === currentClass)) {
-          resultContainer.classList.toggle(errorClassName)
+          resultContainer.classList.toggle(ERROR_CLASS_NAME)
         }
       })
       resultContainer.innerHTML = text
+
+      return false
+    }
+
+    return {
+      validate,
+      getData,
+      setData,
+      submit
     }
   }
 

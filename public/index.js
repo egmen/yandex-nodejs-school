@@ -90,7 +90,7 @@
     function checkDigitSum (text) {
       const digitSum = text
         .match(/\d/g)
-        .reduce((sum, cur) => sum + +cur, 0)
+        .reduce((sum, cur) => sum + Number(cur), 0)
 
       return digitSum
     }

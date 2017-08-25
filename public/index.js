@@ -78,6 +78,10 @@
      * @return {Boolean}      Отмена стандартного действия, если JS загрузился
      */
     function submit (form) {
+      // Выход, если валидация не пройдена
+      const {isValid} = validate()
+      if (!isValid) return false
+
       const {
         action,
         method

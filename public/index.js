@@ -1,31 +1,37 @@
 (function main () {
-  class MyForm {
-    constructor () {
-      this.fio = document.querySelector('input[name="fio"]')
-      this.email = document.querySelector('input[name="email"]')
-      this.phone = document.querySelector('input[name="phone"]')
+  const MyForm = function MyForm () {
+    fioInput = document.querySelector('input[name="fio"]')
+    emailInput = document.querySelector('input[name="email"]')
+    phoneInput = document.querySelector('input[name="phone"]')
+
+    return {
+      validate,
+      getData,
+      setData,
+      submit
     }
-    validate () {
+
+    function validate () {
       return {}
     }
-    getData () {
+    function getData () {
       return {
-        fio: this.fio.value,
-        email: this.email.value,
-        phone: this.phone.value
+        fio: fioInput.value,
+        email: emailInput.value,
+        phone: phoneInput.value
       }
     }
-    setData ({fio, email, phone}) {
-      this.fio.value = fio
-      this.email.value = email
-      this.phone.value = phone
+    function setData ({fio, email, phone}) {
+      fioInput.value = fio
+      emailInput.value = email
+      phoneInput.value = phone
       return
     }
-    submit (form) {
+    function submit (form) {
       form.submit()
       return false
     }
   }
 
-  window.MyForm = new MyForm()
+  window.MyForm = MyForm()
 })()

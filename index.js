@@ -129,7 +129,9 @@
       const actionTypes = {
         success: 2,
         error: 1,
-        progress: 10
+        progress: 10,
+        wrongJson: 1,
+        wrongStatus: 1
       }
       const actionsList = Object
         .keys(actionTypes)

@@ -178,8 +178,8 @@
 
       // Проверка соответсвия текущего класса и отсутвию других
       RESULT_CLASS_NAMES.forEach((currentClass) => {
-        if (resultContainer.classList.contains(currentClass) ^ !(className === currentClass)) {
-          resultContainer.classList.toggle(ERROR_CLASS_NAME)
+        if (resultContainer.classList.contains(currentClass) ^ className === currentClass) {
+          resultContainer.classList.toggle(currentClass)
         }
       })
       resultContainer.innerHTML = text
